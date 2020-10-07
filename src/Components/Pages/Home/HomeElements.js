@@ -1,5 +1,8 @@
 import styled from 'styled-components';
-import {MdArrowForward, MdKeyboardArrowRight} from 'react-icons/md'
+import {MdCall} from 'react-icons/md';
+import {VscCallOutgoing} from 'react-icons/vsc'
+import {GrInstagram} from 'react-icons/gr';
+import {FiArrowRight} from 'react-icons/fi'
 
 export const HomePageContainer = styled.div`
     background: linear-gradient(to bottom, #171201 0%, #000000 100%);
@@ -39,7 +42,7 @@ export const HomePageContent = styled.div`
     z-index:3;
     margin-top:200px;
     max-width:1200px;
-    position:absolute;
+    position:relative;
     padding: 8px 24px;
     display:flex;
     flex-direction:column;
@@ -83,12 +86,35 @@ export const HomePageButtonWrapper = styled.div`
     align-items:center;
 `;
 
-export const ArrowFarward = styled(MdArrowForward)`
+export const ArrowFarward = styled(MdCall)`
     margin-left:8px;
     font-size:20px;
 `;
 
-export const ArrowRight = styled(MdKeyboardArrowRight)`
+export const ArrowRight = styled(VscCallOutgoing)`
     margin-left:8px;
     font-size:20px;
 `;
+
+export const Instagram = styled(GrInstagram)`
+    font-size: 20px;
+`;
+export const HomePageButtonWrapper2 = styled.div`
+    position:absolute;
+    margin-bottom: 10px;
+    bottom:0;
+    right:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    margin-right:10px;
+
+    @media (min-width:1200px){
+        left:auto;
+        right:auto;
+    }
+`;
+
+export const RightArrow = styled(FiArrowRight)`
+    font size:18px;
+`

@@ -11,11 +11,11 @@ function Sidebar({toggle,isOpen}) {
         <SidebarMenu>
           <SidebarLink onClick={toggle} to="about">About</SidebarLink>
           <SidebarLink onClick={toggle} to="services">Services</SidebarLink>
-          <SidebarLink onClick={toggle} to="imageGallery">Image Gallery</SidebarLink>
+          <SidebarLink onClick={toggle} to="gallery">Image Gallery</SidebarLink>
           <SidebarLink onClick={toggle} to="contactUs">Contact Us</SidebarLink>
         </SidebarMenu>
         <SideBtnWrap>
-            <SidebarRoute>Sign in</SidebarRoute>
+            <SidebarRoute>Enquire</SidebarRoute>
         </SideBtnWrap>
       </SideWrapper>
     </SideBarContainer>

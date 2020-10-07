@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import {Link as LinkR} from 'react-router-dom';
-import {Link as LinkS} from 'react-scroll';
 
 export const Nav = styled.nav`
     background: linear-gradient(to bottom, #171201 0%, #000000 100%);
@@ -80,7 +79,7 @@ export const NavMenu = styled.ul`
 export const NavItem = styled.li`
     height:80px;
 `
-export const NavLinks = styled(LinkS)`
+export const NavLinks = styled(LinkR)`
     color:#fff;
     display:flex;
     align-items:center;

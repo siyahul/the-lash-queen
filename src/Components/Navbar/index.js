@@ -41,13 +41,13 @@ function NavBar({toggle}) {
               <NavLinks to="services">Services</NavLinks>
             </NavItem>
             <NavItem>
-              <NavLinks to="imageGallery">Image Gallery</NavLinks>
+              <NavLinks to="gallery">Image Gallery</NavLinks>
             </NavItem>
             <NavItem>
               <NavLinks to="contactUs">Contact us</NavLinks>
             </NavItem>
             <NavBtn>
-            <NavBtnLink to="/signup">Sign Up</NavBtnLink>
+            <NavBtnLink to="/signup">Enquire</NavBtnLink>
           </NavBtn>
           </NavMenu>
           
