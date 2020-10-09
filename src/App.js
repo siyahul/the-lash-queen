@@ -11,14 +11,13 @@ function App() {
   return (
     <Router>
       <Switch>
-      <Route path="/gallery">
-      <ImageGallery />
-    </Route>
-
-      <Route path="/contactus">
+        <Route path="/gallery">
+          <ImageGallery />
+        </Route>
+        <Route path="/contactus">
           <ContactUs />
         </Route>
-      <Route path="/services">
+        <Route path="/services">
           <Services />
         </Route>
         <Route path="/about">

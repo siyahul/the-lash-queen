@@ -16,6 +16,7 @@ export const Nav = styled.nav`
     @media screen and (max-width:960px){
         transition: 0.8s all ease;
     }
+    
 `;
 
 export const NavbarContainer = styled.div`
@@ -30,6 +31,9 @@ export const NavbarContainer = styled.div`
     @media screen and (max-width:360px){
         padding : 0 18px;
         padding-left: 4px;
+    }
+    @media screen and (max-width:480){
+        width:60px;
     }
 `;
 
