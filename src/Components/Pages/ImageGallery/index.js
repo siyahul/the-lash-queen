@@ -19,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
     zIndex: theme.zIndex.drawer + 1,
     color: "#000",
     backdropFilter: "blur(2px)",
-    transition: "all 5s ease-in-out",
   },
 }));
 
@@ -80,7 +79,7 @@ function ImageGallery() {
       </ImageGalleryBg>
       <Footer />
       <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
-        <ImageGalleryContent onClick={focus}>
+        <ImageGalleryContent onClick={handleClose}>
           <ImageDiv>
             <Image src={images[imageId].imageUrl} alt="" />
           </ImageDiv>

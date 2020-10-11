@@ -9,25 +9,27 @@ import ImageGallery from "./Components/Pages/ImageGallery";
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route path="/gallery">
-          <ImageGallery />
-        </Route>
-        <Route path="/contactus">
-          <ContactUs />
-        </Route>
-        <Route path="/services">
-          <Services />
-        </Route>
-        <Route path="/about">
-          <About />
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
-      </Switch>
-    </Router>
+    <div className="app">
+      <Router>
+        <Switch>
+          <Route path="/gallery">
+            <ImageGallery />
+          </Route>
+          <Route path="/contactus">
+            <ContactUs />
+          </Route>
+          <Route path="/services">
+            <Services />
+          </Route>
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </Router>
+    </div>
   );
 }
 

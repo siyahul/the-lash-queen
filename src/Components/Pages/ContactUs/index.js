@@ -2,20 +2,27 @@ import React, { useState } from "react";
 import Footer from "../../Footer";
 import NavBar from "../../Navbar";
 import Sidebar from "../../Sidebar";
-import { ContactUsContainer } from "./ContactUsElements";
+import {
+  ContactUsBg,
+  ContactUsContainer,
+  ContactUsH1,
+} from "./ContactUsElements";
 
 function ContactUs() {
-    const [isOpen, setIsOpen] = useState(false);
-    
-    const toggle = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggle = () => {
     setIsOpen(!isOpen);
   };
   return (
     <>
       <Sidebar toggle={toggle} isOpen={isOpen} />
       <NavBar toggle={toggle} />
-
-      <ContactUsContainer></ContactUsContainer>
+      <ContactUsBg>
+        <ContactUsContainer>
+          <ContactUsH1>Contact Us</ContactUsH1>
+        </ContactUsContainer>
+      </ContactUsBg>
       <Footer />
     </>
   );

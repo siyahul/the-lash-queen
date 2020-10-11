@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import bg from "./bg.jpg";
+import bg from "../../Images/bg.jpg";
 
 export const ImageGalleryBg = styled.div`
   display: flex;
@@ -8,6 +8,9 @@ export const ImageGalleryBg = styled.div`
   width: 100%;
   background: linear-gradient(to bottom, #171201 0%, #000000 100%);
   z-index:10;
+  &::selection{
+    background:none;
+  }
 `;
 
 export const ImageGalleryContainer = styled.div`
@@ -18,11 +21,14 @@ export const ImageGalleryContainer = styled.div`
   width: 100%;
   max-width: 1200px;
   background-image: url(${bg});
-  -o-object-fit:cover;
+  object-fit:cover;
   max-width: 1200px;
   box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
+  &::selection{
+    background:none;
+  }
 `;
 
 export const ImageGalleryContent = styled.div`
@@ -38,6 +44,10 @@ export const ImageGalleryContent = styled.div`
   flex-direction: column;
   align-items: center;
   cursor: pointer;
+
+  &::selection{
+    background:none;
+  }
 
   &:hover {
     transform: scale(1.05);
@@ -56,16 +66,25 @@ export const Image = styled.img`
   width: 100%;
   height: 300px;
   border-radius: 10px;
+  &::selection{
+    background:none;
+  }
 `;
 
 export const Title = styled.h2`
   color: #e3c57e;
   left: 0;
   cursor: pointer;
+  &::selection{
+    background:none;
+  }
 `;
 
 export const Description = styled.p`
   padding: 10px;
   color: #bd9028;
   cursor: pointer;
+  &::selection{
+    background:none;
+  }
 `;
