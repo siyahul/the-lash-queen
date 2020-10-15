@@ -20,7 +20,7 @@ min-height: 100vh;
 width: 100%;
 max-width: 1200px;
 background-image: url(${bg});
-object-fit:cover;
+background-position: center;
 max-width: 1200px;
 box-sizing: border-box;
 display: flex;

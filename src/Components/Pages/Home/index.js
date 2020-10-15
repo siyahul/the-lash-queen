@@ -14,7 +14,6 @@ import {
 } from "./HomeElements";
 import Sidebar from "../../Sidebar";
 import NavBar from "../../Navbar";
-import Background from "../../Images/background.png";
 import { Button, ButtonInsta,ButtonMore } from "../../ButtonElement";
 import Footer from "../../Footer";
 
@@ -32,10 +31,10 @@ function Home() {
   return (
     <>
       <Sidebar toggle={toggle} isOpen={isOpen} />
-      <NavBar toggle={toggle} />
+      <NavBar toggle={toggle} position={true} />
       <HomePageContainer>
         <HomePageBg>
-          <ImageBg src={Background} />
+          <ImageBg src="https://firebasestorage.googleapis.com/v0/b/the-lash-queen.appspot.com/o/Images%2FhomeBackground%2Fbackground.png?alt=media&token=2bc82e67-a34a-4101-af05-1a33c7483062" />
         </HomePageBg>
         <HomePageContent>
           <HomePageH1>The lash Queen</HomePageH1>

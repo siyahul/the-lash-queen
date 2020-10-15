@@ -9,14 +9,13 @@ export const Nav = styled.nav`
     justify-content:center;
     align-items:center;
     font-size:1rem;
-    position:sticky;
+    position:${({ position }) => (position ? "sticky" : "initial")};
     top:0;
     z-index:5;
     
     @media screen and (max-width:960px){
         transition: 0.8s all ease;
     }
-    
 `;
 
 export const NavbarContainer = styled.div`
@@ -90,8 +89,12 @@ export const NavLinks = styled(LinkR)`
     text-decoration:none;
     padding:0 1rem;
     height:100%;
+    transition: all 0.3s ease-in-out;
     cursor:pointer;
-
+    &:hover{
+        color:#d4af37;
+        transition: all 0.3s ease-in-out;
+    }
     &.active{
         border-bottom:3px solid #01bf71;
     }

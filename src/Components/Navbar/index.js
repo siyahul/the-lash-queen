@@ -13,10 +13,10 @@ import {
 } from "./NavbarElements";
 import logo from "../Images/logo.png";
 
-function NavBar({toggle}) {
+function NavBar({toggle,position}) {
   return (
     <>
-      <Nav>
+      <Nav position={position}>
         <NavbarContainer>
           <NavLogo to="/">
             <img
@@ -47,7 +47,7 @@ function NavBar({toggle}) {
               <NavLinks to="contactUs">Contact us</NavLinks>
             </NavItem>
             <NavBtn>
-            <NavBtnLink to="/signup">Enquire</NavBtnLink>
+            <NavBtnLink to="/contactUs">Enquire</NavBtnLink>
           </NavBtn>
           </NavMenu>
           
