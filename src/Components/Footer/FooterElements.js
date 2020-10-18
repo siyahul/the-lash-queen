@@ -17,7 +17,6 @@ export const FooterContainer = styled.div`
 export const FooterItems = styled.div`
     height:100%;
     max-width:1200px;
-    background: ;
     width:100%;
     background: linear-gradient(to bottom, #171201 0%, #000000 100%);
     display:flex;
@@ -32,10 +31,8 @@ export const FooterList = styled.ul`
     list-style-type:none;
     justify-content:space-between;
     align-items:center;
-    padding-left:25px;
     display:flex;
     flex-direction:column;
-    
 `;
 export const FooterListHeading = styled.li`
     color:#fff;

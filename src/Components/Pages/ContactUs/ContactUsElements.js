@@ -9,9 +9,6 @@ export const ContactUsBg = styled.div`
   width: 100%;
   background: linear-gradient(to bottom, #171201 0%, #000000 100%);
   z-index:10;
-  &::selection{
-    background:none;
-  }
 `;
 
 export const ContactUsContainer = styled.div`

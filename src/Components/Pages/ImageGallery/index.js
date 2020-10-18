@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, memo, useRef } from "react";
 import Footer from "../../Footer";
 import NavBar from "../../Navbar";
 import Sidebar from "../../Sidebar";
+import db from "../../../firebase";
+import FlipMove from "react-flip-move";
 import Backdrop from "@material-ui/core/Backdrop";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -27,26 +29,21 @@ function ImageGallery() {
   const [open, setOpen] = useState(false);
   const classes = useStyles();
   const [imageId, setImageId] = useState(0);
-  const [images, setImages] = useState([
-    {
-      imageUrl:
-        "https://images-na.ssl-images-amazon.com/images/I/714O7s0PS6L._SL1350_.jpg",
-      title: "Title1",
-      description: "This is Description",
-    },
-    {
-      imageUrl:
-        "https://images-na.ssl-images-amazon.com/images/I/714O7s0PS6L._SL1350_.jpg",
-      title: "Title2",
-      description: "This is Description",
-    },
-    {
-      imageUrl:
-        "https://images-na.ssl-images-amazon.com/images/I/714O7s0PS6L._SL1350_.jpg",
-      title: "Title3",
-      description: "This is Description",
-    },
-  ]);
+  const [images, setImages] = useState([]);
+  const imageRef = useRef();
+
+  useEffect(() => {
+    db.collection("images")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) => {
+        setImages(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            image: doc.data(),
+          }))
+        );
+      });
+  }, [setImages]);
 
   const toggle = () => {
     setIsOpen(!isOpen);
@@ -66,29 +63,42 @@ function ImageGallery() {
       <NavBar toggle={toggle} />
       <ImageGalleryBg>
         <ImageGalleryContainer>
-          {images.map((image, id) => (
-            <ImageGalleryContent onClick={() => focus(id)}>
-              <ImageDiv>
-                <Image src={image.imageUrl} alt="" />
-              </ImageDiv>
-              <Title>{image.title}</Title>
-              <Description>{image.description}</Description>
-            </ImageGalleryContent>
-          ))}
+          <FlipMove
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            {images?.map((image, id) => (
+              <ImageGalleryContent
+                ref={imageRef}
+                key={image.id}
+                onClick={() => focus(id)}
+              >
+                <ImageDiv>
+                  <Image src={image.image.imageUrl} alt="" />
+                </ImageDiv>
+                <Title>{image.image.title}</Title>
+                <Description>{image.image.description}</Description>
+              </ImageGalleryContent>
+            ))}
+          </FlipMove>
         </ImageGalleryContainer>
       </ImageGalleryBg>
       <Footer />
       <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
         <ImageGalleryContent onClick={handleClose}>
           <ImageDiv>
-            <Image src={images[imageId].imageUrl} alt="" />
+            <Image src={images[imageId]?.image.imageUrl} alt="" />
           </ImageDiv>
-          <Title>{images[imageId].title}</Title>
-          <Description>{images[imageId].description}</Description>
+          <Title>{images[imageId]?.image.title}</Title>
+          <Description>{images[imageId]?.image.description}</Description>
         </ImageGalleryContent>
       </Backdrop>
     </>
   );
 }
 
-export default ImageGallery;
+export default memo(ImageGallery);

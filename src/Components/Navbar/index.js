@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useEffect, useState,memo } from "react";
 import { FaBars } from "react-icons/fa";
+import { useSelector, useDispatch } from "react-redux";
+import {auth} from "../../firebase";
+import {addUser} from "../../Actions";
 import {
   MobileIcon,
   Nav,
@@ -14,6 +17,23 @@ import {
 import logo from "../Images/logo.png";
 
 function NavBar({toggle,position}) {
+
+  const [user,setUser] = useState(null);
+  const dispatch = useDispatch();
+  const userState = useSelector((state) => state.user);
+
+  useEffect(() => {
+    auth.onAuthStateChanged((authUser)=>{
+      if(authUser){
+        dispatch(addUser(authUser));
+      }
+    });
+  },[])
+
+  useEffect(() => {
+    setUser(userState);
+  },[userState]);
+
   return (
     <>
       <Nav position={position}>
@@ -35,19 +55,27 @@ function NavBar({toggle,position}) {
           </MobileIcon>
           <NavMenu>
             <NavItem>
-              <NavLinks to="about">About</NavLinks>
+              <NavLinks to="/about">About</NavLinks>
             </NavItem>
             <NavItem>
-              <NavLinks to="services">Services</NavLinks>
+              <NavLinks to="/services">Services</NavLinks>
             </NavItem>
             <NavItem>
-              <NavLinks to="gallery">Image Gallery</NavLinks>
+              <NavLinks to="/gallery">Image Gallery</NavLinks>
             </NavItem>
             <NavItem>
-              <NavLinks to="contactUs">Contact us</NavLinks>
+              <NavLinks to="/contactUs">Contact us</NavLinks>
             </NavItem>
             <NavBtn>
-            <NavBtnLink to="/contactUs">Enquire</NavBtnLink>
+            <NavBtnLink to="/admin">
+            {
+              user?
+              <p>{user.email}</p>
+              :
+              <p>Sign In</p>
+            }
+            {/*<Link style={{color: "#010606",textDecoration:"none"}} to="/admin">Admin</Link>*/}
+            </NavBtnLink>
           </NavBtn>
           </NavMenu>
           
@@ -57,4 +85,4 @@ function NavBar({toggle,position}) {
   );
 }
 
-export default NavBar;
+export default memo(NavBar);
