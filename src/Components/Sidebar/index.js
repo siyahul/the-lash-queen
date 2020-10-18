@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { auth } from "../../firebase";
 import { addUser } from "../../Actions";
@@ -14,24 +14,23 @@ import {
 } from "./SideBarElements";
 
 function Sidebar({ toggle, isOpen }) {
-
-  const [user,setUser] = useState(null);
+  const [user, setUser] = useState(null);
   const dispatch = useDispatch();
   const userState = useSelector((state) => state.user);
 
   useEffect(() => {
-    auth.onAuthStateChanged((authUser)=>{
-      if(authUser){
+    auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
         dispatch(addUser(authUser));
       }
     });
-  },[])
+  }, []);
 
   useEffect(() => {
     setUser(userState);
-  },[userState]);
+  }, [userState]);
 
-  console.log(user);
+  // console.log(user);
   return (
     <SideBarContainer isOpen={isOpen} onClick={toggle}>
       <Icon>
@@ -53,11 +52,17 @@ function Sidebar({ toggle, isOpen }) {
           </SidebarLink>
         </SidebarMenu>
         <SideBtnWrap>
-          <SidebarRoute to="/admin">{!user?"Sign In":user?.email}</SidebarRoute>
+          <SidebarRoute to="/admin">
+            {!user
+              ? "Sign In"
+              : user?.displayName
+              ? user?.displayName
+              : user?.email}
+          </SidebarRoute>
         </SideBtnWrap>
       </SideWrapper>
     </SideBarContainer>
   );
 }
 
-export default Sidebar;
+export default memo(Sidebar);

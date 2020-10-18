@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,memo } from "react";
 import {
   HomePageBg,
   HomePageButtonWrapper,
@@ -68,4 +68,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default memo(Home);

@@ -1,4 +1,6 @@
 import React, { useEffect, useState, memo } from "react";
+import { auth } from "../../../../firebase";
+import { addUser } from "../../../../Actions";
 import Footer from "../../../Footer";
 import NavBar from "../../../Navbar";
 import Sidebar from "../../../Sidebar";
@@ -28,6 +30,8 @@ import {
   ProgressBox,
   DeleteIconDiv,
 } from "./ImageElements";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -47,19 +51,46 @@ function Images() {
   const [file, setFile] = useState(null);
   const [progress, setProgress] = useState(0);
   const [uploading, setUploading] = useState(false);
+  const userState = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const [user, setUser] = useState(null);
+  const history = useHistory();
+
   useEffect(() => {
-    const unsubscribe = ()=> db.collection("images")
-      .orderBy("timestamp", "desc")
-      .onSnapshot((snapshot) => {
-        setImages(
-          snapshot.docs.map((doc) => ({
-            id: doc.id,
-            images: doc.data(),
-          }))
-        );
-      });
-      unsubscribe();
-  }, [images]);
+    const unsubscribe = () =>
+      db
+        .collection("images")
+        .orderBy("timestamp", "desc")
+        .onSnapshot((snapshot) => {
+          setImages(
+            snapshot.docs.map((doc) => ({
+              id: doc.id,
+              images: doc.data(),
+            }))
+          );
+        });
+    unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        console.log(authUser);
+        dispatch(addUser(authUser));
+      } else {
+        history.push('/admin')
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    setUser(userState);
+  }, [userState]);
+
+  function redirect() {
+    history.push("/admin");
+  }
+
 
   const toggle = () => {
     setIsOpen(!isOpen);
@@ -159,7 +190,8 @@ function Images() {
       <Sidebar toggle={toggle} isOpen={isOpen} />
       <NavBar toggle={toggle} />
       <ImageBg>
-        <ImageContainer>
+        <ImageContainer>{user?(
+          <>
           <ButtonContainer>
             <AddImageto onClick={addImage}>
               <h1>Add Image</h1>
@@ -191,6 +223,15 @@ function Images() {
               </ImageContent>
             ))}
           </FlipMove>
+          </>
+        ):(
+          <ButtonContainer>
+            <AddImageto onClick={redirect}>
+              <h6>You are Not Signed in click here to go to sign in page</h6>
+            </AddImageto>
+          </ButtonContainer>
+        )}
+          
         </ImageContainer>
       </ImageBg>
       <Footer />
@@ -199,7 +240,7 @@ function Images() {
           <CloseIconBox onClick={handleClose}>
             <CloseIcon />
           </CloseIconBox>
-          <form>
+          <form autoComplete="off">
             <TitleInput
               name="title"
               value={title}

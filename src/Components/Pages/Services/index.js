@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import Footer from "../../Footer";
 import NavBar from "../../Navbar";
 import Sidebar from "../../Sidebar";
@@ -63,4 +63,4 @@ function Services() {
   );
 }
 
-export default Services;
+export default memo(Services);

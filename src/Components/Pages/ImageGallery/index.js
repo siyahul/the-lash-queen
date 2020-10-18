@@ -43,7 +43,7 @@ function ImageGallery() {
           }))
         );
       });
-  }, [setImages]);
+  }, []);
 
   const toggle = () => {
     setIsOpen(!isOpen);

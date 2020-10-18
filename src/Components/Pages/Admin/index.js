@@ -20,10 +20,10 @@ import {
 } from "./AdminElements";
 
 function Admin() {
-  const userState = useSelector((state) => state.user);
   const [isOpen, setIsOpen] = useState(false);
-  const [user,setUser] = useState(null);
+  const userState = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const [user,setUser] = useState(null);
   const [value,handleChange] = useForm({
       password:"",
       email: "",
@@ -68,8 +68,10 @@ function Admin() {
   }
 
   const signOut = ()=>{
-    auth.signOut();
-    dispatch(addUser(null));
+    if(window.confirm("Are you sure you want to signOut")){
+      auth.signOut();
+      dispatch(addUser(null));
+    }
   }
 
   const forgotPassword = ()=>{
@@ -94,7 +96,7 @@ function Admin() {
         <AdminContainer>
           {!user ? (
             <SignInContainer>
-              <SignInForm>
+              <SignInForm autoComplete="off">
                 <LabelSignIn for="email">Email</LabelSignIn>
                 <SignInInput name="email" type="email" value={value.email} onChange={handleChange}/>
                 <LabelSignIn for="password">Password</LabelSignIn>

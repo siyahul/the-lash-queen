@@ -61,11 +61,12 @@ export const AddImage = styled.h1`
 `;
 
 export const SignInContainer = styled.div`
-  width:350px;
+  box-sizing:border-box;
+  max-width:350px;
+  width: 100%;
   height:400px;
   border:1px solid #fff;
   background: rgba(255,255,255,0.5);
-  margin:20px;
   display:flex;
   flex-direction: column;
   align-items:center;

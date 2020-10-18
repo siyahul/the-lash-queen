@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,memo } from "react";
 import Footer from "../../Footer";
 import NavBar from "../../Navbar";
 import Sidebar from "../../Sidebar";
@@ -28,4 +28,4 @@ function ContactUs() {
   );
 }
 
-export default ContactUs;
+export default memo(ContactUs);

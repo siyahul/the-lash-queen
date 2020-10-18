@@ -28,12 +28,14 @@ function NavBar({toggle,position}) {
         dispatch(addUser(authUser));
       }
     });
-  },[])
+  },[dispatch])
 
   useEffect(() => {
     setUser(userState);
   },[userState]);
 
+  console.log("running")
+  console.log(userState)
   return (
     <>
       <Nav position={position}>
@@ -70,7 +72,7 @@ function NavBar({toggle,position}) {
             <NavBtnLink to="/admin">
             {
               user?
-              <p>{user.email}</p>
+              <p>{user.displayName?user.displayName:user.email}</p>
               :
               <p>Sign In</p>
             }
