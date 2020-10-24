@@ -158,10 +158,12 @@ export const FormButton = styled.button`
 export const CloseIconBox = styled.div`
   position: absolute;
   top: 10px;
-  right: 10px;
+  font-size:40px;
+  right: 30px;
   cursor: pointer;
   width: 20px;
   height: 20px;
+  color:#ddd;
 `;
 
 export const ProgressBox = styled.div`

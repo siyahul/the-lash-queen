@@ -22,6 +22,7 @@ import {
 } from "./ImageGalleryElements";
 import { CloseIconBox } from "../Admin/ManageImages/ImageElements";
 import { CloseIcon } from "../../Sidebar/SideBarElements";
+import { ContactUsH1 } from "../ContactUs/ContactUsElements";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -69,6 +70,7 @@ function ImageGallery() {
       <NavBar toggle={toggle} />
       <ImageGalleryBg>
         <ImageGalleryContainer>
+        <ContactUsH1>Our Works</ContactUsH1>
           <FlipMove
             style={{
               display: "flex",

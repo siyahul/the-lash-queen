@@ -75,8 +75,24 @@ export const ProfileDisplayImage = styled.img`
   border-radius: 100px;
   object-fit: cover;
 `;
-export const EditInput = styled.input``;
-export const EditButton = styled.button``;
+export const EditInput = styled.input`
+  padding:5px;
+  outline: none;
+  border-radius: 5px;
+  margin:10px;
+  background:rgba(0, 0, 0, 0.5);
+  color: #bd9028;
+  border: none;
+`;
+export const EditButton = styled.button`
+  padding:5px;
+  margin:5px;
+  background:${({success,danger})=>(success ?"#4bb543":danger?"#7a0012":"#fafafa")};
+  color:#ddd;
+  border-radius:5px;
+  border:none;
+  outline: none;
+`;
 
 export const ProfilePictureEdit = styled.div`
   color: black;

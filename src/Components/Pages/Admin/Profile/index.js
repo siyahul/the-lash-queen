@@ -21,6 +21,8 @@ import {
   EditButton,
   ProfilePictureEdit,
 } from "./ProfileElements";
+import { useHistory } from "react-router-dom";
+import { useEffect } from "react";
 
 function Profile({ user }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,9 +33,34 @@ function Profile({ user }) {
     email: "",
   });
 
+  const history = useHistory();
+
+  useEffect(() => {
+    auth().onAuthStateChanged((authUser) => {
+      if (!authUser) {
+        history.push("/admin");
+      }
+    });
+  }, []);
+
   const toggle = () => {
     setIsOpen(!isOpen);
   };
+
+  const verifyEmail = () => {
+    const profileUser = auth().currentUser;
+    if (profileUser) {
+      profileUser
+        .sendEmailVerification()
+        .then(function () {
+          alert("Check your email for verification");
+        })
+        .catch(function (error) {
+          alert(error.message);
+        });
+    }
+  };
+
   const editUserName = (event) => {
     event.preventDefault();
     setEditingUserName(false);
@@ -43,6 +70,7 @@ function Profile({ user }) {
         .updateProfile({ displayName: value.userName })
         .then(() => {
           alert("User Name changed");
+          window.location.reload();
         })
         .catch((err) => {
           alert(err.message);
@@ -151,8 +179,21 @@ function Profile({ user }) {
                         type="text"
                         placeholder="username"
                       />
-                      <EditButton type="submit" onClick={editUserName}>
+                      <EditButton
+                        success={true}
+                        type="submit"
+                        onClick={editUserName}
+                      >
                         Finish
+                      </EditButton>
+                      <EditButton
+                        danger={true}
+                        type="button"
+                        onClick={() => {
+                          setEditingUserName(false);
+                        }}
+                      >
+                        Cancel
                       </EditButton>
                     </form>
                   ) : (
@@ -179,7 +220,12 @@ function Profile({ user }) {
                   {user?.emailVerified ? (
                     <SpanTrue>Yes Verified</SpanTrue>
                   ) : (
-                    <SpanFalse>Not Verified</SpanFalse>
+                    <SpanFalse>
+                      Not Verified{" "}
+                      <EditButton danger onClick={verifyEmail}>
+                        Verify
+                      </EditButton>
+                    </SpanFalse>
                   )}
                 </ProfileSpan>
               </ProfileText>
