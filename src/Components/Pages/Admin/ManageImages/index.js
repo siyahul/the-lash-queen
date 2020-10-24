@@ -11,6 +11,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import firebase from "firebase";
 import FlipMove from "react-flip-move";
 import { LinearProgress, Typography, Box } from "@material-ui/core";
+import imageCompression from "browser-image-compression";
 import {
   Description,
   Image,
@@ -78,7 +79,7 @@ function Images() {
         console.log(authUser);
         dispatch(addUser(authUser));
       } else {
-        history.push('/admin')
+        history.push("/admin");
       }
     });
   }, []);
@@ -91,7 +92,6 @@ function Images() {
     history.push("/admin");
   }
 
-
   const toggle = () => {
     setIsOpen(!isOpen);
   };
@@ -103,10 +103,49 @@ function Images() {
     setOpen(!open);
   };
 
-  const uploadImage = (e) => {
-    e.preventDefault();
+  const uploadCompImage = (mainUrl, coFile) => {
+    if (coFile) {
+      const uploadTask2 = storage
+        .ref(`Images/galleryImage/compressed/${coFile.name}`)
+        .put(coFile);
+
+      uploadTask2.on(
+        "state_changed",
+        (snapshot) => {
+          const progress2 = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          setProgress(progress2);
+        },
+        (error) => {
+          alert(error.message);
+        },
+        () => {
+          storage
+            .ref("Images/galleryImage/compressed")
+            .child(coFile.name)
+            .getDownloadURL()
+            .then((compUrl) => {
+              db.collection("images").add({
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                description: description,
+                imageUrl: mainUrl,
+                compUrl: compUrl,
+                title: title,
+                name: file.name,
+                compName: coFile.name,
+              });
+            });
+        }
+      );
+    } else {
+      alert("error");
+    }
+  };
+
+  const uploadImage = (cFile) => {
     setUploading(true);
-    if (file) {
+    if (file && cFile) {
       const uploadTask = storage
         .ref(`Images/galleryImage/${file.name}`)
         .put(file);
@@ -120,7 +159,6 @@ function Images() {
           setProgress(progress);
         },
         (error) => {
-          console.log(error);
           alert(error.message);
         },
         () => {
@@ -128,14 +166,8 @@ function Images() {
             .ref("Images/galleryImage/")
             .child(file.name)
             .getDownloadURL()
-            .then((url) => {
-              db.collection("images").add({
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                description: description,
-                imageUrl: url,
-                title: title,
-                name: file.name,
-              });
+            .then(async (mainUrl) => {
+              await uploadCompImage(mainUrl, cFile);
               setProgress(0);
               setDescription("");
               setTitle("");
@@ -164,10 +196,31 @@ function Images() {
     }
   };
 
+  async function compress(e) {
+    e.preventDefault();
+    const imageFile = file;
+
+    var options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    };
+    imageCompression(imageFile, options)
+      .then(function (compressedFiles) {
+        return uploadImage(compressedFiles);
+      })
+      .catch(function (error) {
+        console.log(error.message);
+      });
+  }
+
   const storageRef = storage.ref();
 
-  const handleDelete = (imageId, name) => {
+  const handleDelete = (imageId, name, name2) => {
     let desertRef = storageRef.child(`Images/galleryImage/${name}`);
+    let desertRef2 = storageRef.child(
+      `Images/galleryImage/compressed/${name2}`
+    );
     if (
       window.confirm(
         "Are you sure to delete this image it can't be recovered"
@@ -177,7 +230,9 @@ function Images() {
       desertRef
         .delete()
         .then(function () {
-          db.collection("images").doc(imageId).delete();
+          desertRef2.delete().then(function () {
+            db.collection("images").doc(imageId).delete();
+          });
         })
         .catch(function (error) {
           console.log(error);
@@ -190,48 +245,54 @@ function Images() {
       <Sidebar toggle={toggle} isOpen={isOpen} />
       <NavBar toggle={toggle} />
       <ImageBg>
-        <ImageContainer>{user?(
-          <>
-          <ButtonContainer>
-            <AddImageto onClick={addImage}>
-              <h1>Add Image</h1>
-            </AddImageto>
-          </ButtonContainer>
-          <FlipMove
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            {images.map((image, id) => (
-              <ImageContent key={image.id}>
-                <DeleteIconDiv
-                  onClick={() => handleDelete(image.id, image.images.name)}
-                >
-                  <CloseIcon
-                    style={{ fontSize: "xtra-large", color: "lightgray" }}
-                  />
-                </DeleteIconDiv>
+        <ImageContainer>
+          {user ? (
+            <>
+              <ButtonContainer>
+                <AddImageto onClick={addImage}>
+                  <h1 style={{ fontFamily: "Grandstander" }}>Add Image</h1>
+                </AddImageto>
+              </ButtonContainer>
+              <FlipMove
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                {images.map((image, id) => (
+                  <ImageContent key={image.id}>
+                    <DeleteIconDiv
+                      onClick={() =>
+                        handleDelete(
+                          image.id,
+                          image.images.name,
+                          image.images.compName
+                        )
+                      }
+                    >
+                      <CloseIcon
+                        style={{ fontSize: "xtra-large", color: "lightgray" }}
+                      />
+                    </DeleteIconDiv>
 
-                <ImageDiv>
-                  <Image src={image.images.imageUrl} alt="" />
-                </ImageDiv>
-                <Title>{image.images.title}</Title>
-                <Description>{image.images.description}</Description>
-              </ImageContent>
-            ))}
-          </FlipMove>
-          </>
-        ):(
-          <ButtonContainer>
-            <AddImageto onClick={redirect}>
-              <h6>You are Not Signed in click here to go to sign in page</h6>
-            </AddImageto>
-          </ButtonContainer>
-        )}
-          
+                    <ImageDiv>
+                      <Image src={image.images.compUrl} alt="" />
+                    </ImageDiv>
+                    <Title>{image.images.title}</Title>
+                    <Description>{image.images.description}</Description>
+                  </ImageContent>
+                ))}
+              </FlipMove>
+            </>
+          ) : (
+            <ButtonContainer>
+              <AddImageto onClick={redirect}>
+                <h6>You are Not Signed in click here to go to sign in page</h6>
+              </AddImageto>
+            </ButtonContainer>
+          )}
         </ImageContainer>
       </ImageBg>
       <Footer />
@@ -259,11 +320,7 @@ function Images() {
               type="file"
               accept="image/*"
             />
-            <FormButton
-              disabled={uploading}
-              onClick={uploadImage}
-              type="submit"
-            >
+            <FormButton disabled={uploading} onClick={compress} type="submit">
               Add Image
             </FormButton>
           </form>

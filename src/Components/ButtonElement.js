@@ -56,7 +56,7 @@ export const ButtonInsta = styled.a`
 
 export const ButtonMore = styled(LinkR)`
   border-radius: 50px;
-  background: #FCC201;
+  background: #fcc201;
   white-space: nowrap;
   padding: ${({ big }) => (big ? "14px 48px" : "12px 38px")};
   color: ${({ dark }) => (dark ? "#010606" : "#fff")};
@@ -72,7 +72,7 @@ export const ButtonMore = styled(LinkR)`
 
   &:hover {
     transition: all 0.2s ease-in-out;
-    background: #DB9200;
-    color:#fff;
+    background: #db9200;
+    color: #fff;
   }
 `;

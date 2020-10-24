@@ -1,4 +1,4 @@
-import React, { useState,memo } from "react";
+import React, { useState, memo } from "react";
 import {
   HomePageBg,
   HomePageButtonWrapper,
@@ -10,11 +10,12 @@ import {
   ImageBg,
   ArrowFarward,
   ArrowRight,
-  Instagram, RightArrow
+  Instagram,
+  RightArrow,
 } from "./HomeElements";
 import Sidebar from "../../Sidebar";
 import NavBar from "../../Navbar";
-import { Button, ButtonInsta,ButtonMore } from "../../ButtonElement";
+import { Button, ButtonInsta, ButtonMore } from "../../ButtonElement";
 import Footer from "../../Footer";
 
 function Home() {
@@ -55,13 +56,12 @@ function Home() {
               <Instagram />
             </ButtonInsta>
           </HomePageButtonWrapper>
-          
         </HomePageContent>
         <HomePageButtonWrapper2>
-            <ButtonMore to="/about">
-              Read More... <RightArrow />
-            </ButtonMore>
-          </HomePageButtonWrapper2>
+          <ButtonMore to="/about">
+            Read More... <RightArrow />
+          </ButtonMore>
+        </HomePageButtonWrapper2>
       </HomePageContainer>
       <Footer />
     </>

@@ -42,9 +42,12 @@ function Services() {
               <ServicesLi>Make-up professional course</ServicesLi>
               <ServicesLi>Make-up Diploma course</ServicesLi>
               <ServicesLi>Make-up Advanced course</ServicesLi>
-              <ServiceLink to="/contactUs"><ServiceSpan>For more information ContactUs on instagram or call </ServiceSpan></ServiceLink>
-              </ServicesUl>
-                  
+              <ServiceLink to="/contactUs">
+                <ServiceSpan>
+                  For more information ContactUs on instagram or call{" "}
+                </ServiceSpan>
+              </ServiceLink>
+            </ServicesUl>
           </ServiceUlContainer>
           <ServiceH1Container>
             <ServiceH2>Make-up Services -</ServiceH2>

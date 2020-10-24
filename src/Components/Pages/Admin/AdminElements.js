@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import bg from "../../Images/bg.jpg";
-import {Link as LinkR} from 'react-router-dom'
+import { Link as LinkR } from "react-router-dom";
 
 export const AdminBg = styled.div`
   display: flex;
@@ -14,6 +14,7 @@ export const AdminBg = styled.div`
 `;
 
 export const AdminContainer = styled.div`
+  position: relative;
   height: 100%;
   min-height: 100vh;
   display: flex;
@@ -46,60 +47,67 @@ export const AddImageSection = styled.div`
 `;
 
 export const LinkRoute = styled(LinkR)`
- text-decoration: none;
+  text-decoration: none;
+  margin: 20px;
 `;
 
 export const AddImage = styled.h1`
-  text-decoration:none;
-  color:#ddd;
+  text-decoration: none;
+  color: #ddd;
   transition: all 0.3s ease-in-out;
-  font-family:'Sansita Swashed', cursive;
-  &:hover{
-      color:#a97510;
-      transition: all 0.3s ease-in-out;
+  font-family: "Sansita Swashed", cursive;
+  &:hover {
+    color: #a97510;
+    transition: all 0.3s ease-in-out;
   }
 `;
 
 export const SignInContainer = styled.div`
-  box-sizing:border-box;
-  max-width:350px;
+  box-sizing: border-box;
+  max-width: 350px;
   width: 100%;
-  height:400px;
-  border:1px solid #fff;
-  background: rgba(255,255,255,0.5);
-  display:flex;
+  height: 400px;
+  border: 1px solid #fff;
+  background: rgba(255, 255, 255, 0.5);
+  display: flex;
   flex-direction: column;
-  align-items:center;
-  justify-content:center;
-  border-radius:20px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
 `;
 
 export const LabelSignIn = styled.label`
-  color:black;
+  color: black;
 `;
 
 export const SignInForm = styled.form`
   display: flex;
   align-items: center;
-  justify-content:center;
+  justify-content: center;
   flex-direction: column;
 `;
 
 export const SignInInput = styled.input`
-  padding:10px;
-  border-radius:10px;
+  padding: 10px;
+  border-radius: 10px;
   outline: none;
   border: none;
-  margin:10px;
-  background:#ddd;
+  margin: 10px;
+  background: #ddd;
 `;
 
 export const SignInButton = styled.button`
-  padding: ${({primary})=>primary?"10px":"8px"};
-  margin:10px;
-  border-radius:${({primary})=>primary?"10px":"15px"};
-  background-color:${({primary})=>primary?"dodgerblue":"orange"};
-  border:none;
-  outline:none;
-  color:white;
+  padding: ${({ primary }) => (primary ? "10px" : "8px")};
+  margin: 10px;
+  border-radius: ${({ primary }) => (primary ? "10px" : "15px")};
+  background-color: ${({ primary }) => (primary ? "dodgerblue" : "orange")};
+  border: none;
+  outline: none;
+  color: white;
+`;
+
+export const AvatarContainer = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 10px;
 `;

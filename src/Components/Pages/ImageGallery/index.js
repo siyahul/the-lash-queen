@@ -1,4 +1,4 @@
-import React, { useEffect, useState, memo, useRef } from "react";
+import React, { useEffect, useState, memo } from "react";
 import Footer from "../../Footer";
 import NavBar from "../../Navbar";
 import Sidebar from "../../Sidebar";
@@ -14,7 +14,14 @@ import {
   ImageGalleryContainer,
   ImageGalleryContent,
   Title,
+  BackdropContainer,
+  BackDropDescription,
+  BackDropTitle,
+  BackDropImage,
+  BackdropTitleContainer,
 } from "./ImageGalleryElements";
+import { CloseIconBox } from "../Admin/ManageImages/ImageElements";
+import { CloseIcon } from "../../Sidebar/SideBarElements";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -30,7 +37,6 @@ function ImageGallery() {
   const classes = useStyles();
   const [imageId, setImageId] = useState(0);
   const [images, setImages] = useState([]);
-  const imageRef = useRef();
 
   useEffect(() => {
     db.collection("images")
@@ -52,8 +58,8 @@ function ImageGallery() {
     setOpen(!open);
   };
 
-  const focus = (id) => {
-    setImageId(id);
+  const focus = async (id) => {
+    await setImageId(id);
     handleClose();
   };
 
@@ -72,13 +78,9 @@ function ImageGallery() {
             }}
           >
             {images?.map((image, id) => (
-              <ImageGalleryContent
-                ref={imageRef}
-                key={image.id}
-                onClick={() => focus(id)}
-              >
+              <ImageGalleryContent key={image.id} onClick={() => focus(id)}>
                 <ImageDiv>
-                  <Image src={image.image.imageUrl} alt="" />
+                  <Image src={image.image.compUrl} alt="The Lash Queen" />
                 </ImageDiv>
                 <Title>{image.image.title}</Title>
                 <Description>{image.image.description}</Description>
@@ -88,14 +90,22 @@ function ImageGallery() {
         </ImageGalleryContainer>
       </ImageGalleryBg>
       <Footer />
-      <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
-        <ImageGalleryContent onClick={handleClose}>
-          <ImageDiv>
-            <Image src={images[imageId]?.image.imageUrl} alt="" />
-          </ImageDiv>
-          <Title>{images[imageId]?.image.title}</Title>
-          <Description>{images[imageId]?.image.description}</Description>
-        </ImageGalleryContent>
+      <Backdrop className={classes.backdrop} open={open}>
+        <BackdropContainer>
+          <CloseIconBox onClick={handleClose}>
+            <CloseIcon />
+          </CloseIconBox>
+          <BackDropImage
+            src={images[imageId]?.image.imageUrl}
+            alt={images[imageId]?.image.compUrl}
+          />
+          <BackdropTitleContainer>
+            <BackDropTitle>{images[imageId]?.image.title}</BackDropTitle>
+            <BackDropDescription>
+              {images[imageId]?.image.description}
+            </BackDropDescription>
+          </BackdropTitleContainer>
+        </BackdropContainer>
       </Backdrop>
     </>
   );

@@ -1,4 +1,4 @@
-import React, { useState,memo } from "react";
+import React, { useState, memo } from "react";
 import Footer from "../../Footer";
 import NavBar from "../../Navbar";
 import Sidebar from "../../Sidebar";
@@ -30,13 +30,18 @@ function About() {
           <AboutPara>
             Welcome to the official website of The Lash Queen Saloon and makeup
             academy. with internationally-certified professional bridal make-up
-            artists. The Lash Queen provides a host of make-up services and make-up courses.and with
-            a pleasure of too many satisfied clients.
-            </AboutPara>
-            <AboutPara>
-            We use only the best make-up brands in the industry such as <AboutSpan>MAC,Anastasia Beverly Hills,Morphe,Huda Beauty,Kiko Milano,Loreal,Kenti Beauty,Boby Brown</AboutSpan>.etc... which are hand picked from the official stores of North anmerica and Europe
-            </AboutPara>
-          
+            artists. The Lash Queen provides a host of make-up services and
+            make-up courses.and with a pleasure of too many satisfied clients.
+          </AboutPara>
+          <AboutPara>
+            We use only the best make-up brands in the industry such as{" "}
+            <AboutSpan>
+              MAC,Anastasia Beverly Hills,Morphe,Huda Beauty,Kiko
+              Milano,Loreal,Kenti Beauty,Boby Brown
+            </AboutSpan>
+            .etc... which are hand picked from the official stores of North
+            anmerica and Europe
+          </AboutPara>
 
           <AboutH1Container>
             <AboutH1>Videos</AboutH1>

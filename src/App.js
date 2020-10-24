@@ -8,12 +8,18 @@ import ContactUs from "./Components/Pages/ContactUs";
 import ImageGallery from "./Components/Pages/ImageGallery";
 import Admin from "./Components/Pages/Admin";
 import Images from "./Components/Pages/Admin/ManageImages";
+import Profile from "./Components/Pages/Admin/Profile";
+import { useSelector } from "react-redux";
 
 function App() {
+  const userState = useSelector((state) => state.user);
   return (
     <div className="app">
       <Router>
         <Switch>
+          <Route path="/admin/profile">
+            <Profile user={userState} />
+          </Route>
           <Route path="/admin/images">
             <Images />
           </Route>

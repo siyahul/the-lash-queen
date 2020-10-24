@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import bg from "../../Images/bg.jpg";
-import {Link as LinkR} from "react-router-dom"
+import { Link as LinkR } from "react-router-dom";
 
 export const ServiceBg = styled.div`
   display: flex;
@@ -45,7 +45,7 @@ export const ServiceH1 = styled.h1`
 `;
 
 export const ServiceH2 = styled.h2`
-  font-family: 'Sansita Swashed', cursive;
+  font-family: "Sansita Swashed", cursive;
 `;
 
 export const Video = styled.video`
@@ -59,10 +59,10 @@ export const Video = styled.video`
 
 export const ServicePara = styled.p`
   border-radius: 10px;
-  width:90%;
-  background: rgba(0,0,0,0.5);
-  font-family: 'Dancing Script', cursive;
-  text-align:justify;
+  width: 90%;
+  background: rgba(0, 0, 0, 0.5);
+  font-family: "Dancing Script", cursive;
+  text-align: justify;
   letter-spacing: 2px;
   line-height: 1.3;
   text-indent: 60px;
@@ -74,8 +74,8 @@ export const ServicePara = styled.p`
   box-sizing: border-box;
 `;
 export const ServiceSpan = styled.span`
-  font-family:inherit;
-  color:#d4af37;
+  font-family: inherit;
+  color: #d4af37;
 `;
 
 export const ServiceUlContainer = styled.div`
@@ -89,28 +89,28 @@ export const ServiceUlContainer = styled.div`
 `;
 
 export const ServicesUl = styled.ul`
-  align-items:left;
-  padding:20px;
+  align-items: left;
+  padding: 20px;
   border-radius: 10px;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   font-size: 15px;
   text-align: right;
 `;
 
 export const ServicesLi = styled.li`
-text-align:justify;
-letter-spacing: 2px;
-text-indent: 60px;
-padding: 10px;
-font-size: 20px;
-color: #fff;
-width: 90%;
-max-width: 720px;
-text-shadow: 2px 2px 10px rgba(218, 165, 32, 0.5);
-box-sizing: border-box;
-font-family: 'Sansita Swashed', cursive;
+  text-align: justify;
+  letter-spacing: 2px;
+  text-indent: 60px;
+  padding: 10px;
+  font-size: 20px;
+  color: #fff;
+  width: 90%;
+  max-width: 720px;
+  text-shadow: 2px 2px 10px rgba(218, 165, 32, 0.5);
+  box-sizing: border-box;
+  font-family: "Sansita Swashed", cursive;
 `;
 export const ServiceLink = styled(LinkR)`
   text-decoration: none;
-  font-family: 'Dancing Script', cursive;
+  font-family: "Dancing Script", cursive;
 `;

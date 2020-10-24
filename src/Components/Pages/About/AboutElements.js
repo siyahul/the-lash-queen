@@ -38,7 +38,7 @@ export const AboutH1Container = styled.div`
   box-sizing: border-box;
 `;
 export const AboutH1 = styled.h1`
-  font-family: 'Sansita Swashed', cursive;
+  font-family: "Sansita Swashed", cursive;
 `;
 
 export const Video = styled.video`
@@ -52,9 +52,9 @@ export const Video = styled.video`
 
 export const AboutPara = styled.p`
   border-radius: 10px;
-  background: rgba(0,0,0,0.5);
-  font-family: 'Dancing Script', cursive;
-  text-align:justify;
+  background: rgba(0, 0, 0, 0.5);
+  font-family: "Dancing Script", cursive;
+  text-align: justify;
   letter-spacing: 2px;
   line-height: 1.3;
   text-indent: 60px;
@@ -67,6 +67,6 @@ export const AboutPara = styled.p`
   box-sizing: border-box;
 `;
 export const AboutSpan = styled.span`
-  font-family:inherit;
-  color:#d4af37;
+  font-family: inherit;
+  color: #d4af37;
 `;
